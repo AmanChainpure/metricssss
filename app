@@ -9,9 +9,9 @@ import pandas as pd
 query = """
         SELECT  *
         FROM c
-        WHERE c.createdAt >= '2025-04-01'
+         WHERE c.createdAt >= '2025-05-01' AND c.createdAt <= '2025-05-15T23:59:59Z'
         ORDER BY c.updatedAt DESC
-        """
+        """ 
 
 
 parameters = []
