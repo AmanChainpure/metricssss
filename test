@@ -1,7 +1,9 @@
-df_weekly_users = df_data_flat.groupby(['month', 'week_of_month', 'userName']).size().reset_index(name='query_count')
+query = """
+SELECT c.userId, c.user_query, c.updatedAt, c.userName
+FROM c
+WHERE c.updatedAt >= "2025-05-01T00:00:00Z" AND c.updatedAt <= "2025-05-15T23:59:59Z"
+"""
 
-# Now group to get total unique users per week
-active_users_summary = df_weekly_users.groupby(['month', 'week_of_month']).agg(
-    active_users=('userName', 'nunique'),  
-    active_users_list=('userName', lambda x: list(x.unique()))
-).reset_index()
+items = list(container.query_items(query=query, enable_cross_partition_query=True))
+df_data = pd.DataFrame(items)
+df_data
