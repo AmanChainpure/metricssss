@@ -1,5 +1,5 @@
 query = """
-SELECT c.userId, c.user_query, c.updatedAt, c.userName
+SELECT TOP 20 c.userId, c.user_query, c.updatedAt, c.userName
 FROM c
 WHERE c.updatedAt >= "2025-05-01T00:00:00Z" AND c.updatedAt <= "2025-05-15T23:59:59Z"
 """
