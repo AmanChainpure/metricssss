@@ -1,0 +1,7 @@
+df_weekly_users = df_data_flat.groupby(['month', 'week_of_month', 'userName']).size().reset_index(name='query_count')
+
+# Now group to get total unique users per week
+active_users_summary = df_weekly_users.groupby(['month', 'week_of_month']).agg(
+    active_users=('userName', 'nunique'),  
+    active_users_list=('userName', lambda x: list(x.unique()))
+).reset_index()
